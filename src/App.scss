@@ -1,0 +1,15 @@
+$main-color: #181c1f;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-weight: 500;
+}
+
+body{
+    font-family: 'Inter';
+    background-color: $main-color;
+    color: #fff;
+    line-height: 25px;
+}

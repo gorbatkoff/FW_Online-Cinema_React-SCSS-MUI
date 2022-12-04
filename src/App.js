@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { React, useEffect } from "react";
+import { Routes, Route, Link } from 'react-router-dom';
 
-function App() {
+import Header from './components/Header/Header';
+import IndexContent from "./components/IndexContent/IndexContent";
+
+import './App.scss';
+import WatchPage from "./components/VideoBlock/WatchPage";
+
+export default function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <Routes>
+        <Route path="/" element={[<IndexContent />]} />
+        <Route path="/video" element={[<WatchPage />]} />
+      </Routes>
+
+
     </div>
   );
 }
 
-export default App;
