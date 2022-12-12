@@ -1,0 +1,19 @@
+$button-color: #212121;
+
+.player{
+    display: flex;
+    justify-content: space-between;
+}
+
+.controls{
+    width: 100%;
+    text-align: center;
+
+    button{
+        display: block;
+        margin-top: 5px;
+        width: 100%;
+        text-align: right;
+        background-color: $button-color;
+    }
+}
