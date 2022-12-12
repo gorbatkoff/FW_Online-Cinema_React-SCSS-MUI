@@ -9,6 +9,12 @@ import Modal from '@mui/material/Modal';
 import QueuePlayNextIcon from '@mui/icons-material/QueuePlayNext';
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import ShareIcon from '@mui/icons-material/Share';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
+
 
 import styles from './MoviePage.module.scss';
 
@@ -33,9 +39,45 @@ const style = {
 
 const MoviePage = (props: Props) => {
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref,
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const [open, setOpen] = React.useState(false);
+
+  const [snackBarMessage, setSnackBarMessage] = useState('');
+  const [typeOfSnackBarMessage, setTypeOfSnackBarMessage] = useState('success');
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        Закрыть
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
 
   const id = useParams().id;
@@ -66,6 +108,8 @@ const MoviePage = (props: Props) => {
 
   const rating = Number(movie?.rating?.kp.toFixed(1));
 
+  let movies = localStorage.getItem('movies') || '';
+
   async function getMovieInfo() {
     try {
       const response = await axios.get(`https://api.kinopoisk.dev/movie?token=KNPB2YP-RW0MH46-H4RVRAZ-CCFGZVF&search=${id}&field=id`)
@@ -78,36 +122,30 @@ const MoviePage = (props: Props) => {
       alert("Error" + error.message)
     }
   }
-
   async function createRoom() {
     alert('hello world')
   }
   async function addToFavorite() {
 
-    if(localStorage.getItem('movies')){
-      let arr = JSON.parse(localStorage.getItem('movies') || '{}'); //array
-
-      if(!arr.includes(id)){
-        arr.push(id);
-        alert('Фильм добавлен в избранное')
-      }
-
-      else{
-        alert('Фильм уже в избранном')
-      }
+    if (movies.indexOf(String(id)) > -1) {
+      setSnackBarMessage(prev => 'Фильм уже добавлен в избранное! :c')
+      handleClick();
     }
 
-    const array = [id];
-
-    localStorage.setItem('movies', JSON.stringify(array));
+    else {
+      localStorage.setItem('movies', (localStorage.getItem('movies') || '') + `${id}.`);
+      setSnackBarMessage(prev => 'Фильм добавлен в избранное!')
+      handleClick();
+    }
   }
+
+
   async function addToPlayNext() {
     alert('hello world')
   }
   async function shareFilm() {
     alert('hello world')
   }
-
 
   useEffect(() => {
     getMovieInfo();
@@ -136,7 +174,7 @@ const MoviePage = (props: Props) => {
           </div>
 
 
-          <div>
+          {/* <div>
             <Button variant="contained" sx={{ background: "linear-gradient(155deg, rgba(255,183,0,1) 0%, rgba(187,0,130,1) 100%)", marginTop: "3em" }} size="large" className={styles['create-room-button']}
               onClick={handleOpen}
             >
@@ -159,19 +197,26 @@ const MoviePage = (props: Props) => {
                 </Typography>
               </Box>
             </Modal>
-          </div>
+          </div> */}
 
           <div className={styles.favorite}>
-            <TurnedInIcon fontSize="large" onClick={addToFavorite} />
+            <TurnedInIcon fontSize="large" className={movies.indexOf(String(id)) > -1 ? 'addedToFavorite' : 'info'} onClick={addToFavorite} />
             <QueuePlayNextIcon fontSize="large" onClick={addToPlayNext} />
             <ShareIcon fontSize="large" onClick={shareFilm} />
+            <div>
+              <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
+                  {snackBarMessage}
+                </Alert>
+              </Snackbar>
+            </div>
           </div>
         </div>
 
-          <img style={{boxShadow: `0px 0px 85px #fff`}} className={styles['movie-poster']} src={movie?.poster?.url} alt="Movie Poster" height="800" width="auto" />
+        <img style={{ boxShadow: `0px 0px 85px #fff` }} className={styles['movie-poster']} src={movie?.poster?.url} alt="Movie Poster" height="800" width="auto" />
       </div>
     </div>
   )
 }
 
-export default MoviePage;
+export default MoviePage; 
