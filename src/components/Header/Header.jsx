@@ -102,8 +102,8 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Профиль</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Настройки профиля</MenuItem>
     </Menu>
   );
 
@@ -194,7 +194,8 @@ export default function Header() {
           <Box sx={{ flexGrow: 1 }} />
 
             <Box className={styles['nav-block']}>
-                <Link to={'/video'}>Ваши просмотры</Link>
+                <a href='/video'>Ваши просмотры</a>
+                <Link to={'/room'}>Комнаты</Link>
                 <Link to={'/films'}>Фильмы</Link>
                 <Link to={'/serials'}>Сериалы</Link>
                 <Link to={'/subscribe'}>Подписки</Link>
