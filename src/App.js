@@ -20,15 +20,15 @@ export default function App() {
     baseURL: 'https://api.kinopoisk.dev/'
   });
 
-  async function getData(){
+  async function getData() {
     try {
 
       const response = await api.get('movie?token=KNPB2YP-RW0MH46-H4RVRAZ-CCFGZVF&search=1405926&field=id&search=326&field=id&search=689&field=id&search=435&field=id&search=333&field=id');
-      
+
       setFilms(response.data);
 
-    } 
-    
+    }
+
     catch (error) {
       alert('Error: ' + error.message);
     }
