@@ -1,0 +1,32 @@
+.footer {
+    margin-top: 200px;
+    padding: 50px 5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161718;
+
+    .copyright {
+        width: 400px;
+        font-weight: bold;
+
+        .domain {
+            margin-top: 30px;
+        }
+    }
+
+    .social {
+        display: flex;
+        justify-content: space-between;
+        width: 200px;
+    }
+
+    .links {
+        font-size: 18px;
+        line-height: 1.5;
+        ul {
+            list-style-type: none;
+            text-align: right;
+        }
+    }
+}
