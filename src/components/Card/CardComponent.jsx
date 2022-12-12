@@ -13,10 +13,6 @@ function CardComponent({ film }) {
     console.log(typeof rating);
     const poster = film.poster.previewUrl;
 
-    // useEffect(() => {
-
-    // }, [])
-
     return (
         <div className={styles.poster}>
             <a href={"/about-film/" + film.id}>
@@ -26,10 +22,6 @@ function CardComponent({ film }) {
 
                 <div className={styles['movie-title']}>
                     {film.name}
-                </div>
-
-                <div className={styles['movie-genre']}>
-                    <span style={{ color: "#6c757d" }}>Мелодрама, Комедия, {film.year}</span>
                 </div>
 
                 <div className={styles['movie-rating']}>
