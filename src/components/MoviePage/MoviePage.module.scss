@@ -1,0 +1,56 @@
+.movie-page {
+    margin-top: 50px;
+}
+
+.movie-year {
+    margin-top: 20px;
+    color: gray;
+}
+
+.movie-information {
+    margin: 80px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.movie-poster {
+    img {
+        border-radius: 10px;
+    }
+}
+
+.description {
+    width: 75%;
+    font-size: 18px;
+    text-align: justify;
+    margin: 40px 0;
+}
+
+.genre {
+    padding: 8px 40px;
+    border-radius: 8px;
+    background-color: rgb(15, 15, 16);
+    border: 1px solid rgb(165, 165, 165);
+    margin-right: 1em;
+}
+
+.create-room-button {
+    background-color:red;    
+    margin-top: 45px;
+    font-size: 24px;
+    text-transform: none;
+    padding: 5px 2em;
+    width: 300px;
+}
+
+.favorite{
+    display: flex;
+    margin-top: 5vh;
+    width: 300px;
+    justify-content: space-between;
+
+    svg{
+        cursor: pointer;
+    }
+}
