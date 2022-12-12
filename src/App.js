@@ -10,6 +10,7 @@ import RoomPage from "./components/RoomPage/RoomPage";
 
 import axios from 'axios';
 import MoviePage from "./components/MoviePage/MoviePage.tsx";
+import Footer from "./components/Footer/Footer.tsx";
 
 export default function App() {
 
@@ -48,6 +49,7 @@ export default function App() {
         <Route path="/room" element={[<RoomPage />]} />
         <Route path="/about-film/:id" element={[<MoviePage />]} />
       </Routes>
+      <Footer />
     </div>
   );
 }
