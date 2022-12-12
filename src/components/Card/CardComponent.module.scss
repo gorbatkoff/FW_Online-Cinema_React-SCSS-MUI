@@ -1,0 +1,30 @@
+.poster{
+    max-width: 20%;
+}
+
+.movie-image {
+    img {
+        border-radius: 10px;
+        height: 245px;
+        object-fit: cover;
+        background: #a8a8a8;
+        width: 180px;
+    }
+}
+
+.movie-genre {
+    margin-top: 5px;
+    color: #6c757d;
+}
+
+.movie-title{
+    width: 100%;
+}
+
+.movie-rating {
+    font-weight: bold;
+}
+
+.gold {
+    color: gold;
+}
