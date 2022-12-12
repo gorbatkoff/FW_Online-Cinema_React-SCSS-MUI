@@ -9,6 +9,7 @@ import WatchPage from "./components/VideoBlock/WatchPage";
 import RoomPage from "./components/RoomPage/RoomPage";
 
 import axios from 'axios';
+import MoviePage from "./components/MoviePage/MoviePage.tsx";
 
 export default function App() {
 
@@ -45,9 +46,8 @@ export default function App() {
         <Route path="/" element={[<IndexContent films={films.docs} />]} />
         <Route path="/video" element={[<WatchPage />]} />
         <Route path="/room" element={[<RoomPage />]} />
+        <Route path="/about-film/:id" element={[<MoviePage />]} />
       </Routes>
-
-
     </div>
   );
 }
