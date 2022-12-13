@@ -23,8 +23,13 @@ export default function WatchPage() {
     <div className={styles.player}>
       
       <div className={styles.video}>
-        <div id="player"></div>
-        <Player id="player" file="https://plrjs.com/sample.mp4" />
+        {/* <div id="player"></div>
+        <Player id="player" file="https://plrjs.com/sample.mp4" /> */}
+
+        <iframe src="https://3.annacdn.cc/X9oh7OoQLGxr?kp_id=4958223" width="1500" height="600" frameborder="0" allowfullscreen></iframe>
+
+        {/* <iframe src="https://3.annacdn.cc/X9oh7OoQLGxr/tv-series/4135?autoplay=1&episode=3&season=1&start_time=15&poster=https://i.pinimg.com/474x/77/8a/b1/778ab1e2fdfd430ec484edc66f6f4e2f.jpg" width="640" height="480" frameborder="0" allowfullscreen></iframe> */}
+
       </div>
       
       <div className={styles.controls}>
@@ -53,11 +58,11 @@ function useScript(url) {
   useEffect(() => {
     const script = document.createElement("script");
     script.src = url;
-    script.async = true;
+    script.async = false;
     document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
+    // return () => {
+    //   document.body.removeChild(script);
+    // };
   }, [url]);
 }
 
