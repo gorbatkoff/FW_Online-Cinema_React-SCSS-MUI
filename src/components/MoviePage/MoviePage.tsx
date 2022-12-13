@@ -168,8 +168,8 @@ const MoviePage = (props: Props) => {
           </p>
 
           <div>
-            {movie?.genres.map((genre) => {
-              return <span className={styles.genre}>{genre?.name.toUpperCase()}</span>;
+            {movie?.genres.map((genre, i) => {
+              return <span key={i} className={styles.genre}>{genre?.name.toUpperCase()}</span>;
             })}
           </div>
 
