@@ -5,13 +5,14 @@ import Player from "../../Player";
 
 import styles from './WatchPage.module.scss';
 
-const ws = new WebSocket("ws://95.163.235.66:80/api/room/");
-ws.onopen = () => {
-  console.log('hello world')
-};
+// const ws = new WebSocket("ws://95.163.235.66:80/api/room/");
 
-ws.onmessage = (event) => {
-}
+// ws.onopen = () => {
+//   console.log('hello world')
+// };
+
+// ws.onmessage = (event) => {
+// }
 
 
 export default function WatchPage() {
