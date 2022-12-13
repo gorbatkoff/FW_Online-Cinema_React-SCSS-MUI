@@ -8,9 +8,6 @@ import { Link } from 'react-router-dom';
 function CardComponent({ film }) {
 
     const rating = Number(film.rating.kp.toFixed(1));
-
-    console.log(rating);
-    console.log(typeof rating);
     const poster = film.poster.previewUrl;
 
     return (
