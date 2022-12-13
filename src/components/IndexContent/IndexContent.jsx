@@ -11,7 +11,6 @@ function IndexContent({ films }) {
 
   function renderFilms(films) {
     return films.map((film) => {
-      console.log(film)
       return <CardComponent key={film.id}film={film}/>
     })
   }
