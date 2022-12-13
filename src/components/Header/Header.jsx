@@ -194,7 +194,7 @@ export default function Header() {
           <Box sx={{ flexGrow: 1 }} />
 
             <Box className={styles['nav-block']}>
-                <a href='/video'>Ваши просмотры</a>
+                <a href='/room'>Ваши просмотры</a>
                 <Link to={'/room'}>Комнаты</Link>
                 <Link to={'/films'}>Фильмы</Link>
                 <Link to={'/serials'}>Сериалы</Link>
