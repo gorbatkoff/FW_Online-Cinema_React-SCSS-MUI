@@ -229,7 +229,7 @@ const MoviePage = (props: Props) => {
           </div>
         </div>
 
-        <img style={{ boxShadow: `0px 0px 85px #fff` }} className={styles['movie-poster']} src={movie?.poster?.url} alt="Movie Poster" height="800" width="auto" />
+        <img style={{ boxShadow: `0px 0px 85px #fff` }} className={styles['movie-poster']} src={movie?.poster?.url || "https://play-lh.googleusercontent.com/5czw6iycA8YhjI653GQdwnnmu8NNzEMXV32gZKoVCYZV6PQUAv_YV0uJ2PU1E-Jm9PE"} alt="Movie Poster" height="800" width="auto" />
       </div>
     </div>
   )
