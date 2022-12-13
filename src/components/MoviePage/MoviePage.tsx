@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Button, Container } from '@mui/material';
+import { Button, Container, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
 import QueuePlayNextIcon from '@mui/icons-material/QueuePlayNext';
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import ShareIcon from '@mui/icons-material/Share';
-import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
-
-
-import styles from './MoviePage.module.scss';
 
 import axios from 'axios';
+import BasicTabs from './Tabs/BasicTabs';
+
+import styles from './MoviePage.module.scss';
 
 type Props = {}
 
@@ -28,7 +28,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 800,
-  height: 400,
+  height: 500,
   color: 'black',
   bgcolor: 'background.paper',
   border: '2px solid #000',
@@ -39,6 +39,11 @@ const style = {
 
 const MoviePage = (props: Props) => {
 
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
+
+
   const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
     ref,
@@ -46,7 +51,7 @@ const MoviePage = (props: Props) => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const [snackBarMessage, setSnackBarMessage] = useState('');
   const [typeOfSnackBarMessage, setTypeOfSnackBarMessage] = useState('success');
@@ -173,31 +178,42 @@ const MoviePage = (props: Props) => {
             })}
           </div>
 
-
-          {/* <div>
+          <div>
             <Button variant="contained" sx={{ background: "linear-gradient(155deg, rgba(255,183,0,1) 0%, rgba(187,0,130,1) 100%)", marginTop: "3em" }} size="large" className={styles['create-room-button']}
-              onClick={handleOpen}
+              onClick={handleOpenModal}
             >
               Создать комнату
             </Button>
             <Modal
-              open={open}
-              onClose={handleClose}
+              open={openModal}
+              onClose={handleCloseModal}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
               <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h5" component="h2">
-                  <center>
-                    <span className={styles['create-room-title']}>Создать комнату</span>
-                  </center>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  <center><h2 className={styles['create-room-title']}>Создание комнаты</h2></center>
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                  <div className={styles['enter-name']}>
+                    <h3>Введите ваше имя:</h3>
+                    <TextField variant='filled'></TextField>
+                  </div>
+
+                  <div style={{marginTop: "3em"}}>
+                    <h3>Выберите тип комнаты</h3>
+                    <div>
+                      <BasicTabs />
+                    </div>
+
+                    <div className={styles['create-room']}>
+                      <Button variant="outlined">Создать комнату</Button>
+                    </div>
+                  </div>
                 </Typography>
               </Box>
             </Modal>
-          </div> */}
+          </div>
 
           <div className={styles.favorite}>
             <TurnedInIcon fontSize="large" className={movies.indexOf(String(id)) > -1 ? 'addedToFavorite' : 'info'} onClick={addToFavorite} />
