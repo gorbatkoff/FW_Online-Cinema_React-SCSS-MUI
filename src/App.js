@@ -20,10 +20,10 @@ export default function App() {
     baseURL: 'https://api.kinopoisk.dev/'
   });
 
-  async function getData() {
+  const getData = useCallback(async () =>{
     try {
 
-      const response = await api.get('movie?token=KNPB2YP-RW0MH46-H4RVRAZ-CCFGZVF&search=1405926&field=id&search=326&field=id&search=689&field=id&search=435&field=id&search=333&field=id');
+      const response =  await api.get('movie?token=KNPB2YP-RW0MH46-H4RVRAZ-CCFGZVF&search=381&field=id&search=382&field=id&search=383&field=id&search=384&field=id&search=385&field=id');
 
       setFilms(response.data);
 
@@ -33,7 +33,7 @@ export default function App() {
       alert('Error: ' + error.message);
     }
 
-  }
+  }, [])
 
 
   useEffect(() => {
