@@ -4,8 +4,8 @@ import styles from './Prealoder.module.scss';
 
 function Prealoder() {
     return (
-        <div class={styles.container}>
-            <div class={styles.preloader}></div>
+        <div className={styles.container}>
+            <div className={styles.preloader}></div>
         </div>
     )
 }
