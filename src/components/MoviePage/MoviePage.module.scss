@@ -60,3 +60,30 @@
     color: rgb(76, 76, 241);
     margin: 0 auto;
 }
+
+.enter-name{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    align-items: center;
+}
+
+.tabs{
+    display: flex;
+    justify-content: space-between;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.room-info{
+
+    p{
+        font-size: larger;
+    }
+}
+
+
+.create-room{
+    display: flex;
+    justify-content: center;
+}
