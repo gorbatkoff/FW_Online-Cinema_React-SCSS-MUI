@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 function CardComponent({ film }) {
 
     const rating = Number(film.rating.kp.toFixed(1));
-    const poster = film.poster.previewUrl;
+    const poster = film?.poster?.previewUrl || "https://play-lh.googleusercontent.com/5czw6iycA8YhjI653GQdwnnmu8NNzEMXV32gZKoVCYZV6PQUAv_YV0uJ2PU1E-Jm9PE";
 
     return (
         <div className={styles.poster}>
@@ -22,7 +22,7 @@ function CardComponent({ film }) {
                 </div>
 
                 <div className={styles['movie-rating']}>
-                    Рейтинг: <span className={rating > 8.5 ? 'gold' : rating > 7.5 ? 'green' : 'red'}>{rating}</span>
+                    Рейтинг: <span className={rating >= 8 ? 'gold' : rating > 6.5 ? 'green' : 'red'}>{rating}</span>
                 </div>
             </a>
         </div>
