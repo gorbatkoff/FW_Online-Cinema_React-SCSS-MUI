@@ -54,7 +54,7 @@ export default function BasicTabs() {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} className={styles.tabs} onChange={handleChange} aria-label="basic tabs example">
-          <Tab icon={<MeetingRoomIcon color="disabled" disabled fontSize='large'/>} label="ОТКРЫТАЯ" {...a11yProps(0)}/>
+          <Tab icon={<MeetingRoomIcon color="secondary" disabled fontSize='large'/>} label="ОТКРЫТАЯ" {...a11yProps(0)}/>
           <Tab icon={<NoMeetingRoomIcon color="secondary" fontSize='large'/>} label="ЗАКРЫТАЯ" {...a11yProps(1)}/>
         </Tabs>
       </Box>
