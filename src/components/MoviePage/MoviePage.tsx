@@ -14,6 +14,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
+import { v1 as uuidv1 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 import axios from 'axios';
 import BasicTabs from './Tabs/BasicTabs';
@@ -39,27 +41,52 @@ const style = {
 
 const MoviePage = (props: Props) => {
 
-  const [openModal, setOpenModal] = useState(false);
+  const id = useParams().id;
+
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
+  const [name, setName] = useState('');
+  const [isClosed, setIsClosed] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [snackBarMessage, setSnackBarMessage] = useState('');
 
+  const createRoom = async () => {
+    try {
+      
+      const newRoomObj = {
+        name: name,
+        isClosed: isClosed,
+        movieId: id,
+        userId: Math.ceil(Math.random()*10000).toString(),
+        roomId: uuidv4(),
+      }
+
+      localStorage.setItem('room', JSON.stringify(newRoomObj));
+
+      window.location.href = `/room/${newRoomObj.roomId}/`;
+      // window.location.href = `/room`;
+
+    } 
+    catch (error) {
+      alert('Error' + error.message);
+    }
+  }
+
+
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+  }
   const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
     ref,
   ) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-
-  const [open, setOpen] = useState(false);
-
-  const [snackBarMessage, setSnackBarMessage] = useState('');
-  const [typeOfSnackBarMessage, setTypeOfSnackBarMessage] = useState('success');
-
   const handleClick = () => {
     setOpen(true);
   };
-
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -67,26 +94,6 @@ const MoviePage = (props: Props) => {
 
     setOpen(false);
   };
-
-  const action = (
-    <React.Fragment>
-      <Button color="secondary" size="small" onClick={handleClose}>
-        Закрыть
-      </Button>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </React.Fragment>
-  );
-
-
-  const id = useParams().id;
-
   type Movie = {
     name: string,
     genres: Array<{
@@ -127,9 +134,6 @@ const MoviePage = (props: Props) => {
       alert("Error" + error.message)
     }
   }
-  async function createRoom() {
-    alert('hello world')
-  }
   async function addToFavorite() {
 
     if (movies.indexOf(String(id)) > -1) {
@@ -143,8 +147,6 @@ const MoviePage = (props: Props) => {
       handleClick();
     }
   }
-
-
   async function addToPlayNext() {
     alert('hello world')
   }
@@ -192,22 +194,22 @@ const MoviePage = (props: Props) => {
             >
               <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                  <center><h2 className={styles['create-room-title']}>Создание комнаты</h2></center>
+                  <center><span className={styles['create-room-title']}>Создание комнаты</span></center>
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   <div className={styles['enter-name']}>
                     <h3>Введите ваше имя:</h3>
-                    <TextField variant='filled'></TextField>
+                    <TextField variant='filled' value={name} onChange={(e) => handleChangeName(e)}></TextField>
                   </div>
 
-                  <div style={{marginTop: "3em"}}>
+                  <div style={{ marginTop: "3em" }}>
                     <h3>Выберите тип комнаты</h3>
                     <div>
                       <BasicTabs />
                     </div>
 
                     <div className={styles['create-room']}>
-                      <Button variant="outlined">Создать комнату</Button>
+                      <Button variant="outlined" onClick={createRoom}>Создать комнату</Button>
                     </div>
                   </div>
                 </Typography>
