@@ -75,7 +75,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={[<IndexContent films={films} />]} />
         <Route path="/room" element={[<WatchPage />]} />
-        <Route path="/room/82f486cd-9597-49e9-9c45-e1fd023f32fe/" element={[<WatchPage />]} />
+        <Route path="/room/:id" element={[<WatchPage />]} />
         {/* <Route path="/room" element={[<RoomPage />]} /> */}
         <Route path="/about-film/:id" element={[<MoviePage />]} />
       </Routes>
