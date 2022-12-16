@@ -59,13 +59,13 @@ const MoviePage = (props: Props) => {
         name: name,
         isClosed: isClosed,
         movieId: id,
-        userId: Math.ceil(Math.random()*10000).toString(),
+        userId: localStorage.getItem('userId'),
         roomId: uuidv4(),
       }
 
       localStorage.setItem('room', JSON.stringify(newRoomObj));
 
-      window.location.href = `/watch-room${newRoomObj.roomId}`;
+      window.location.href = `/watch-room:${newRoomObj.roomId}`;
       // window.location.href = `/room`;
 
     } 
