@@ -65,7 +65,7 @@ const MoviePage = (props: Props) => {
 
       localStorage.setItem('room', JSON.stringify(newRoomObj));
 
-      window.location.href = `/room/${newRoomObj.roomId}/`;
+      window.location.href = `/watch-room${newRoomObj.roomId}`;
       // window.location.href = `/room`;
 
     } 
