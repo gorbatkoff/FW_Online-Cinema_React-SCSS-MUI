@@ -22,7 +22,6 @@ import BasicTabs from './Tabs/BasicTabs';
 
 import styles from './MoviePage.module.scss';
 
-type Props = {}
 
 const style = {
   position: 'absolute',
@@ -39,7 +38,7 @@ const style = {
   p: 4,
 };
 
-const MoviePage = (props: Props) => {
+const MoviePage = () => {
 
   const id = useParams().id;
 
@@ -78,7 +77,7 @@ const MoviePage = (props: Props) => {
   const handleChangeName = (e) => {
     setName(e.target.value);
   }
-  const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  const Alert = React.forwardRef(function Alert(
     props,
     ref,
   ) {
@@ -87,34 +86,34 @@ const MoviePage = (props: Props) => {
   const handleClick = () => {
     setOpen(true);
   };
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = () => {
     if (reason === 'clickaway') {
       return;
     }
 
     setOpen(false);
   };
-  type Movie = {
-    name: string,
-    genres: Array<{
-      name: string,
-    }>,
-    countries: Array<{
-      name: string,
-    }>,
-    persons: Array<Object>,
-    id: number,
-    year: number,
-    description: string,
-    rating: {
-      kp: number,
-    }
-    poster: {
-      _id: string,
-      url: string,
-      previewUrl: string
-    },
-  }
+  // type Movie = {
+  //   name: string,
+  //   genres: Array<{
+  //     name: string,
+  //   }>,
+  //   countries: Array<{
+  //     name: string,
+  //   }>,
+  //   persons: Array<Object>,
+  //   id: number,
+  //   year: number,
+  //   description: string,
+  //   rating: {
+  //     kp: number,
+  //   }
+  //   poster: {
+  //     _id: string,
+  //     url: string,
+  //     previewUrl: string
+  //   },
+  // }
 
   const [movie, setMovie] = useState<Movie | null>(null);
 

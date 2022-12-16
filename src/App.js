@@ -9,7 +9,7 @@ import './App.scss';
 import WatchPage from "./components/VideoBlock/WatchPage";
 import RoomPage from "./components/RoomPage/RoomPage";
 
-import MoviePage from "./components/MoviePage/MoviePage.tsx";
+import MoviePage from "./components/MoviePage/MoviePage.jsx";
 import Footer from "./components/Footer/Footer.tsx";
 
 import axios from 'axios';
@@ -35,7 +35,6 @@ export default function App() {
         <Route path="/" element={[<IndexContent />]} />
         <Route path="/room" element={[<WatchPage />]} />
         <Route path="/watch-room::id" element={[<WatchPage />]} />
-        {/* <Route path="/room" element={[<RoomPage />]} /> */}
         <Route path="/about-film/:id" element={[<MoviePage />]} />
       </Routes>
       <Footer />
