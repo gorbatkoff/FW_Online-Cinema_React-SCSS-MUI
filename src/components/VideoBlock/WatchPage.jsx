@@ -52,43 +52,49 @@ ws.onmessage = (event) => {
     switch (data.operation) {
       case "start":
         console.log(data.operation, " ", data.progress);
-        // progress = data.progress; 
-        // isPauseClient = false; 
-        // player.api("play", url + "[seek:" + progress + "]"); 
+
+        if (window.pljssglobal.length > 0) {
+          window.pljssglobal[0].api("play");
+          window.pljssglobal[0].api("seek", data.progress);
+        }
+
         break;
       case "stop":
         console.log(data.operation, " ", data.progress);
-        // progress = data.progress; 
-        // isPauseClient = true; 
-        // // player.api('play', url+"[seek:"+progress+"]") 
-        // player.api("pause"); 
+
+        if (window.pljssglobal.length > 0) {
+          window.pljssglobal[0].api("pause");
+          window.pljssglobal[0].api("seek", data.progress);
+        }
+
         break;
       case "seek":
         console.log(data.operation, " ", data.progress);
-        // progress = data.progress; 
-        // player.api("seek", progress); 
+        if (window.pljssglobal.length > 0) {
+          window.pljssglobal[0].api("seek", data.progress);
+        }
         break;
-      case "sync":
-        console.log(data.operation, " ", data.progress);
-        // progress = data.progress; 
-        // isPauseClient = data.isPause; 
-        // player.api("play", url + "[seek:" + progress + "]"); 
-        break;
-      case "changeVideo":
-        console.log(data.operation, " ", data.progress);
-      // player.api("file", data.videoSrc); 
-      // progress = data.progress; 
-      // player.api("seek", progress); 
-      // break; 
     }
   }
-  // progressSpan.innerHTML = data.progress; 
 };
 
-export default function WatchPage() {
-  useScript("./playerjs.js");
+var wsSend = function (data) {
+  if (!ws.readyState) {
+    setTimeout(function () {
+      wsSend(data);
+    }, 100);
+  } else {
+    ws.send(data);
+  }
+};
 
-  const roomIdFromURL = useParams().id;
+var roomIdFromURL;
+
+export default function WatchPage() {
+
+  roomIdFromURL = useParams().id;
+
+  useScript("./playerjs.js");
 
   const roomObject = {};
 
@@ -101,17 +107,6 @@ export default function WatchPage() {
       return false;
     }
   }
-
-  var wsSend = function (data) {
-    if (!ws.readyState) {
-      setTimeout(function () {
-        wsSend(data);
-      }, 100);
-    } else {
-      ws.send(data);
-    }
-  };
-
 
   async function createRoom() {
     try {
@@ -160,7 +155,7 @@ export default function WatchPage() {
     }
   }
 
-    let clgIs = isOwner(roomIdFromURL);
+  let clgIs = isOwner(roomIdFromURL);
 
   useEffect(() => {
     { clgIs ? createRoom() : joinRoom() }
@@ -180,14 +175,14 @@ export default function WatchPage() {
       </div>
 
       <div className={styles.controls}>
-        <Button onClick={startPlayer} variant="contained">Начать</Button>
-        <Button onClick={stopPlayer} variant="contained">Остановить</Button>
+        <Button onClick={play} variant="contained">Начать</Button>
+        <Button onClick={pause} variant="contained">Остановить</Button>
         <Button variant="contained">Синхронизировать</Button>
         <Button onClick={PlayNewVideo} variant="contained">Начать новое видео</Button>
         {
-          JSON.parse(localStorage.getItem("room"))?.userId == localStorage.getItem("userId")
+          JSON.parse(localStorage.getItem("room"))?.roomId == roomIdFromURL
             ?
-            <div>Вы админ</div>
+            <span style={{ padding: "8px 15px", borderRadius: "8px", backgroundColor: "gold", color: "#000" }}>Вы админ</span>
             :
             <div>Всмысле</div>
         }
@@ -232,23 +227,43 @@ function startPlayer() {
   if (window.pljssglobal.length > 0) {
     window.pljssglobal[0].api("play");
   }
+
 }
+
+function play() {
+  const roomOperating = {
+    method: "watch",
+    roomId: roomIdFromURL,
+    progress: window.pljssglobal[0].api("time"),
+    isPause: true,
+    operation: "start",
+  };
+
+  // console.log(roomOperating) 
+  wsSend(JSON.stringify(roomOperating));
+}
+
+
+function pause() {
+  const roomOperating = {
+    method: "watch",
+    roomId: roomIdFromURL,
+    progress: window.pljssglobal[0].api("time"),
+    isPause: false,
+    operation: "stop",
+  };
+
+  // console.log(roomOperating) 
+  wsSend(JSON.stringify(roomOperating));
+}
+
 
 
 function stopPlayer() {
   if (window.pljssglobal.length > 0) {
-    window.pljssglobal[0].api("stop");
+    window.pljssglobal[0].api("pause");
   }
 }
-
-
-
-
-
-
-
-
-
 
 {/* <iframe src="https://3.annacdn.cc/X9oh7OoQLGxr?kp_id=4374" width="1500" height="600" frameBorder="0" allowFullScreen></iframe>
 
