@@ -19,6 +19,12 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
+import Switch from '@mui/material/Switch';
+
+import Snowfall from 'react-snowfall'
+
+import Logo from '../Images/Logo.svg';
+
 import styles from './Header.module.scss';
 
 const Search = styled('div')(({ theme }) => ({
@@ -61,9 +67,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Header() {
+export default function Header({setIsShowSnow, isShowSnow}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -80,6 +87,10 @@ export default function Header() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+
+  const handleShowSnow = () => {
+    setIsShowSnow(prev => !prev);
+  }
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -163,24 +174,19 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{backgroundColor: "#181c1f"}}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography
-            variant="h6"
+            variant="h1"
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            <Link to="/" >
-              <h1 style={{fontSize: "22px", textDecoration: "none", color: "#fff"}}>Family Watch</h1>
+          <Box sx={{ marginRight: "10px"}}>
+
+            <Link to="/" style={{display: 'flex', alignItems: 'center'}}>
+              <img src={Logo} alt="Family Watch" height="75" width="75" />
+              <h1 style={{fontSize: "22px", textDecoration: "none", marginLeft: "3%",color: "#fff"}}>Family Watch</h1>
             </Link>
+          </Box>
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -191,6 +197,27 @@ export default function Header() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+          <Box sx={{ flexGrow: 1 }}>
+
+          <Switch
+      checked={isShowSnow}
+      onChange={handleShowSnow}
+      color="warning"
+      inputProps={{ 'aria-label': 'controlled' }}
+    />
+          </Box>
+
+          {isShowSnow 
+          ? 
+          <Snowfall style={{
+            position: 'fixed',
+            width: '100vw',
+            height: '100vh',
+          }} />
+          :
+            <></>
+          }
+
           <Box sx={{ flexGrow: 1 }} />
 
             <Box className={styles['nav-block']}>
