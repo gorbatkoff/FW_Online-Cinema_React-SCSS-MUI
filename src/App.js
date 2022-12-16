@@ -9,25 +9,39 @@ import './App.scss';
 import WatchPage from "./components/VideoBlock/WatchPage";
 import RoomPage from "./components/RoomPage/RoomPage";
 
-import axios from 'axios';
 import MoviePage from "./components/MoviePage/MoviePage.tsx";
 import Footer from "./components/Footer/Footer.tsx";
 
+import axios from 'axios';
+
+const addIdToUser = () => {
+  if (!localStorage.getItem('userId')) {
+    localStorage.setItem('userId', (Math.random() * 1000000).toFixed().toString());
+  }
+}
+
 export default function App() {
+
+  const [isShowSnow, setIsShowSnow] = useState(false);
+
+  useEffect(() => {
+    addIdToUser()
+  }, [])
 
   return (
     <div>
-      <Header />
+      <Header setIsShowSnow={setIsShowSnow} isShowSnow={isShowSnow}/>
       <Routes>
         <Route path="/" element={[<IndexContent />]} />
         <Route path="/room" element={[<WatchPage />]} />
-        <Route path="/roomers" element={[<WatchPage />]} />
-        <Route path="/room/:id" element={[<WatchPage />]} />
-        <Route path="/watch-room:id" element={[<WatchPage />]} />
+        <Route path="/watch-room::id" element={[<WatchPage />]} />
         {/* <Route path="/room" element={[<RoomPage />]} /> */}
         <Route path="/about-film/:id" element={[<MoviePage />]} />
       </Routes>
       <Footer />
+      
+
+      
     </div>
   );
 }
