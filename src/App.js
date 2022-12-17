@@ -3,17 +3,17 @@ import { React, useState, useEffect, useContext, useCallback } from "react";
 import { Routes, Route, Link } from 'react-router-dom';
 
 import Header from './components/Header/Header';
-import IndexContent from "./components/IndexContent/IndexContent";
+import IndexContent from "./components/IndexContent/IndexContent.jsx";
 
 import './App.scss';
-import WatchPage from "./components/VideoBlock/WatchPage";
-import RoomPage from "./components/RoomPage/RoomPage";
+import WatchPage from "./components/VideoBlock/WatchPage.jsx";
+import RoomPage from "./components/RoomPage/RoomPage.jsx";
 
 import MoviePage from "./components/MoviePage/MoviePage.jsx";
-import Footer from "./components/Footer/Footer.tsx";
+import Footer from "./components/Footer/Footer.jsx";
 
 import axios from 'axios';
-import PageNotFound from "./components/PageNotFound/PageNotFound";
+import PageNotFound from "./components/PageNotFound/PageNotFound.jsx";
 
 const addIdToUser = () => {
   if (!localStorage.getItem('userId')) {
@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <div>
-      <Header setIsShowSnow={setIsShowSnow} isShowSnow={isShowSnow}/>
+      <Header setIsShowSnow={setIsShowSnow} isShowSnow={isShowSnow} />
       <Routes>
         <Route path="/" element={[<IndexContent />]} />
         <Route path="/room" element={[<WatchPage />]} />
@@ -40,9 +40,9 @@ export default function App() {
         <Route path="*" element={[<PageNotFound />]} />
       </Routes>
       <Footer />
-      
 
-      
+
+
     </div>
   );
 }
