@@ -86,13 +86,13 @@ const MoviePage = () => {
   const handleClick = () => {
     setOpen(true);
   };
-  const handleClose = () => {
-    if (reason === 'clickaway') {
-      return;
-    }
+  // const handleClose = () => {
+  //   if (reason === 'clickaway') {
+  //     return;
+  //   }
 
-    setOpen(false);
-  };
+  //   setOpen(false);
+  // };
   // type Movie = {
   //   name: string,
   //   genres: Array<{
@@ -115,7 +115,7 @@ const MoviePage = () => {
   //   },
   // }
 
-  const [movie, setMovie] = useState<Movie | null>(null);
+  const [movie, setMovie] = useState(null);
 
   const rating = Number(movie?.rating?.kp.toFixed(1));
 
@@ -221,11 +221,11 @@ const MoviePage = () => {
             <QueuePlayNextIcon fontSize="large" onClick={addToPlayNext} />
             <ShareIcon fontSize="large" onClick={shareFilm} />
             <div>
-              <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
                   {snackBarMessage}
                 </Alert>
-              </Snackbar>
+              </Snackbar> */}
             </div>
           </div>
         </div>
