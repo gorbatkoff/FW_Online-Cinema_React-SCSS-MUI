@@ -184,7 +184,8 @@ export default function WatchPage() {
             ?
             <span style={{ padding: "8px 15px", borderRadius: "8px", backgroundColor: "gold", color: "#000" }}>Вы админ</span>
             :
-            <div>Всмысле</div>
+
+            <></>
         }
 
       </div>

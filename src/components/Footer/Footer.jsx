@@ -6,9 +6,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import styles from './Footer.module.scss';
 import { Link } from 'react-router-dom';
 
-type Props = {}
-
-export default function Footer({ }: Props) {
+export default function Footer() {
     return (
 
         <footer className={styles.footer}>

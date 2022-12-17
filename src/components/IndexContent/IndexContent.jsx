@@ -48,7 +48,7 @@ function IndexContent() {
 
   const scrollHandler = (e) => {
 
-    if(e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 330){
+    if(e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 830){
       setFetching(true);
     }
 
