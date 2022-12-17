@@ -13,6 +13,7 @@ import MoviePage from "./components/MoviePage/MoviePage.jsx";
 import Footer from "./components/Footer/Footer.tsx";
 
 import axios from 'axios';
+import PageNotFound from "./components/PageNotFound/PageNotFound";
 
 const addIdToUser = () => {
   if (!localStorage.getItem('userId')) {
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/room" element={[<WatchPage />]} />
         <Route path="/watch-room::id" element={[<WatchPage />]} />
         <Route path="/about-film/:id" element={[<MoviePage />]} />
+        <Route path="*" element={[<PageNotFound />]} />
       </Routes>
       <Footer />
       
