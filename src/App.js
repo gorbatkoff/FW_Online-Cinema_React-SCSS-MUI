@@ -39,7 +39,7 @@ export default function App() {
         <Route path="/about-film/:id" element={[<MoviePage />]} />
         <Route path="*" element={[<PageNotFound />]} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
 
 
 
