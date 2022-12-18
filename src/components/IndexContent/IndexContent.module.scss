@@ -13,10 +13,60 @@
         font-size: 18px;
     }
 
-    .titles{
+    .titles {
         display: grid;
+        width: fit-content;
         grid-template-columns: repeat(5, 20%);
         grid-gap: 1em;
-        margin: 40px 0;
+        margin: 40px auto;
     }
 }
+
+@media (max-width: 970px) {
+    .index-container{
+        .titles{
+            grid-template-columns: repeat(4, 25%);
+            justify-content: space-between;
+            grid-row-gap: 3em;
+            grid-column-gap: 0em;
+        }
+
+        img{
+            width: 20vw;
+        }
+    }
+}
+
+
+
+@media (max-width: 670px) {
+    .index-container{
+        .titles{
+            grid-template-columns: repeat(3, 30%);
+            justify-content: space-between;
+            grid-row-gap: 3em;
+            grid-column-gap: 0em;
+        }
+
+        img{
+            width: 30vw;
+        }
+    }
+}
+
+
+@media (max-width: 470px) {
+    .index-container{
+        .titles{
+            grid-template-columns: repeat(2, 45%);
+            justify-content: space-between;
+            grid-row-gap: 3em;
+            grid-column-gap: 0em;
+        }
+
+        img{
+            width: 40vw;
+        }
+    }
+}
+
