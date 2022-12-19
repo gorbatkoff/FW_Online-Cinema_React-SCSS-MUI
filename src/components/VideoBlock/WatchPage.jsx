@@ -171,7 +171,7 @@ export default function WatchPage() {
 
       <div className={styles.video}>
         <div id="player"></div>
-        <Player id="player" file="https://youtu.be/WYHzQExWGGc" />
+        <Player id="player" file="https://youtu.be/GaUlxZ_5g48" />
       </div>
 
       <div className={styles.controls}>

@@ -7,12 +7,10 @@ import IndexContent from "./components/IndexContent/IndexContent.jsx";
 
 import './App.scss';
 import WatchPage from "./components/VideoBlock/WatchPage.jsx";
-import RoomPage from "./components/RoomPage/RoomPage.jsx";
 
 import MoviePage from "./components/MoviePage/MoviePage.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 
-import axios from 'axios';
 import PageNotFound from "./components/PageNotFound/PageNotFound.jsx";
 
 const addIdToUser = () => {
@@ -39,10 +37,7 @@ export default function App() {
         <Route path="/about-film/:id" element={[<MoviePage />]} />
         <Route path="*" element={[<PageNotFound />]} />
       </Routes>
-      {/* <Footer /> */}
-
-
-
+      <Footer />
     </div>
   );
 }
